@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Creative Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">MyPortfolio</div>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="page-header">
+        <h1>My Work</h1>
+        <p>A selection of my recent projects.</p>
+    </section>
+
+    <section class="portfolio-filter container">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="app">App</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+    </section>
+
+    <section class="portfolio-grid container">
+        <div class="project-card" data-category="web">
+            <div class="project-image placeholder-gradient"></div>
+            <div class="project-overlay">
+                <h3>E-commerce Platform</h3>
+                <p>Web Development</p>
+                <a href="#" class="btn-icon"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+        <div class="project-card" data-category="app">
+            <div class="project-image placeholder-gradient"></div>
+            <div class="project-overlay">
+                <h3>Fitness Tracker</h3>
+                <p>Mobile App</p>
+                <a href="#" class="btn-icon"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+        <div class="project-card" data-category="design">
+            <div class="project-image placeholder-gradient"></div>
+            <div class="project-overlay">
+                <h3>Brand Identity</h3>
+                <p>Graphic Design</p>
+                <a href="#" class="btn-icon"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+        <div class="project-card" data-category="web">
+            <div class="project-image placeholder-gradient"></div>
+            <div class="project-overlay">
+                <h3>Corporate Website</h3>
+                <p>Web Development</p>
+                <a href="#" class="btn-icon"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+        <div class="project-card" data-category="app">
+            <div class="project-image placeholder-gradient"></div>
+            <div class="project-overlay">
+                <h3>Social Network</h3>
+                <p>Mobile App</p>
+                <a href="#" class="btn-icon"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+        <div class="project-card" data-category="design">
+            <div class="project-image placeholder-gradient"></div>
+            <div class="project-overlay">
+                <h3>Product Packaging</h3>
+                <p>Design</p>
+                <a href="#" class="btn-icon"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 MyPortfolio. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
