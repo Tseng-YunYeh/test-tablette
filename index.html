@@ -20,27 +20,31 @@
                 <img src="imgs/logo.png" alt="MyPortfolio Logo">
             </a>
         </div>
+        
+        <button id="lang-toggle-mobile" class="lang-btn mobile-only" aria-label="Switch Language">EN</button>
+
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
         </div>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" class="active" data-i18n="nav.home">Home</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
             <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
+            <li><button id="lang-toggle-desktop" class="lang-btn desktop-only" aria-label="Switch Language">EN</button></li>
         </ul>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
-            <h1 class="fade-in">Hello, I'm <span class="highlight">Sean</span></h1>
-            <p class="slide-up">Creative Developer & Designer</p>
+            <h1 class="fade-in"><span data-i18n="home.greeting">Hello, I'm</span> <span class="highlight">Sean</span></h1>
+            <p class="slide-up" data-i18n="home.role">Creative Developer & Designer</p>
             <div class="cta-group slide-up">
-                <a href="portfolio.html" class="btn primary">View Work</a>
-                <a href="pdfs/Tseng_YunYeh_CV_En.pdf" class="btn secondary" download>Download CV <i class="fas fa-download"></i></a>
+                <a href="portfolio.html" class="btn primary" data-i18n="home.viewWork">View Work</a>
+                <a href="pdfs/Tseng_YunYeh_CV_En.pdf" class="btn secondary" download><span data-i18n="home.downloadCV">Download CV</span> <i class="fas fa-download"></i></a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -52,12 +56,12 @@
 
     <section class="featured-work">
         <div class="container">
-            <h2 class="section-title">Featured Work</h2>
+            <h2 class="section-title" data-i18n="home.featuredWork">Featured Work</h2>
             <div id="featured-portfolio" class="project-grid">
                 <!-- Dynamic Content -->
             </div>
             <div class="center-btn">
-                <a href="portfolio.html" class="btn primary">View All Projects</a>
+                <a href="portfolio.html" class="btn primary" data-i18n="home.viewAllProjects">View All Projects</a>
             </div>
         </div>
     </section>
@@ -68,7 +72,7 @@
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-        <p>&copy; 2025 MyPortfolio. All rights reserved.</p>
+        <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
     </footer>
 
     <script src="js/main.js"></script>

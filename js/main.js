@@ -1,8 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cookie Helpers
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
     // Theme Switcher
     const themeToggle = document.getElementById('theme-toggle');
     const icon = themeToggle ? themeToggle.querySelector('i') : null;
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = getCookie('theme');
 
     if (savedTheme) {
         document.documentElement.setAttribute('data-theme', savedTheme);
@@ -18,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
             document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            setCookie('theme', newTheme, 365); // Save for 1 year
 
             if (icon) {
                 icon.classList.toggle('fa-moon');
@@ -26,6 +48,67 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Language Switcher
+    const langToggleDesktop = document.getElementById('lang-toggle-desktop');
+    const langToggleMobile = document.getElementById('lang-toggle-mobile');
+    let currentLang = getCookie('lang') || 'en';
+    let translations = {};
+
+    async function loadTranslations(lang) {
+        try {
+            const response = await fetch(`i18n/${lang}.json`);
+            translations = await response.json();
+            applyTranslations();
+            updateLangButtons(lang);
+        } catch (error) {
+            console.error('Error loading translations:', error);
+        }
+    }
+
+    function applyTranslations() {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            const keys = key.split('.');
+            let value = translations;
+            keys.forEach(k => {
+                if (value) value = value[k];
+            });
+            
+            if (value) {
+                element.textContent = value;
+            }
+        });
+
+        // Update "All" filter button if it exists
+        const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+        if (allBtn && translations.portfolio && translations.portfolio.filterAll) {
+            allBtn.textContent = translations.portfolio.filterAll;
+        }
+    }
+
+    function updateLangButtons(lang) {
+        const nextLang = lang === 'en' ? 'FR' : 'EN';
+        if (langToggleDesktop) langToggleDesktop.textContent = nextLang;
+        if (langToggleMobile) langToggleMobile.textContent = nextLang;
+    }
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'fr' : 'en';
+        setCookie('lang', currentLang, 365);
+        loadTranslations(currentLang);
+    }
+
+    if (langToggleDesktop) {
+        langToggleDesktop.addEventListener('click', toggleLanguage);
+    }
+    
+    if (langToggleMobile) {
+        langToggleMobile.addEventListener('click', toggleLanguage);
+    }
+
+    // Initial Load
+    loadTranslations(currentLang);
 
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
@@ -48,10 +131,25 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hamburger Animation
             hamburger.classList.toggle('toggle');
         });
+
+        // Close menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('nav-active');
+                hamburger.classList.remove('toggle');
+                
+                links.forEach(l => {
+                    l.style.animation = '';
+                });
+            });
+        });
     }
 
     // Load Portfolio Data
     loadPortfolio();
+
+    // Initialize Lightbox
+    createLightbox();
 
     // GSAP Animations
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -323,15 +421,59 @@ styleSheet.innerText = `
             transform: translateX(0);
         }
     }
-    
-    .toggle .line:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    .toggle .line:nth-child(2) {
-        opacity: 0;
-    }
-    .toggle .line:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
 `;
 document.head.appendChild(styleSheet);
+
+// Add Gooey Filter for Liquid Effect
+function addGooeyFilter() {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "position: absolute; width: 0; height: 0; pointer-events: none;");
+    svg.innerHTML = `
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+    `;
+    document.body.appendChild(svg);
+}
+addGooeyFilter();
+
+function createLightbox() {
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    document.body.appendChild(lightbox);
+
+    const img = document.createElement('img');
+    lightbox.appendChild(img);
+
+    const closeBtn = document.createElement('span');
+    closeBtn.classList.add('close');
+    closeBtn.innerHTML = '&times;';
+    lightbox.appendChild(closeBtn);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target !== img) {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+                img.src = '';
+            }, 300);
+        }
+    });
+
+    // Event Delegation for Images
+    document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.project-card')) {
+            const src = e.target.src;
+            img.src = src;
+            lightbox.style.display = 'flex';
+            // Small timeout to allow display:flex to apply before opacity transition
+            setTimeout(() => {
+                lightbox.classList.add('active');
+            }, 10);
+        }
+    });
+}

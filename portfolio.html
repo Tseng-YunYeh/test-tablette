@@ -20,23 +20,27 @@
                 <img src="imgs/logo.png" alt="MyPortfolio Logo">
             </a>
         </div>
+        
+        <button id="lang-toggle-mobile" class="lang-btn mobile-only" aria-label="Switch Language">EN</button>
+
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html" class="active">Portfolio</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="portfolio.html" class="active" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
             <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
+            <li><button id="lang-toggle-desktop" class="lang-btn desktop-only" aria-label="Switch Language">EN</button></li>
         </ul>
     </nav>
 
     <section class="page-header">
-        <h1>My Work</h1>
-        <p>A selection of my recent projects.</p>
+        <h1 data-i18n="portfolio.title">My Work</h1>
+        <p data-i18n="portfolio.subtitle">A selection of my recent projects.</p>
     </section>
 
     <div id="full-portfolio" class="container">
@@ -49,7 +53,7 @@
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-        <p>&copy; 2025 MyPortfolio. All rights reserved.</p>
+        <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
     </footer>
 
     <script src="js/main.js"></script>

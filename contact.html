@@ -20,23 +20,27 @@
                 <img src="imgs/logo.png" alt="MyPortfolio Logo">
             </a>
         </div>
+        
+        <button id="lang-toggle-mobile" class="lang-btn mobile-only" aria-label="Switch Language">EN</button>
+
         <div class="hamburger">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+            <li><a href="about.html" data-i18n="nav.about">About</a></li>
+            <li><a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a></li>
+            <li><a href="contact.html" class="active" data-i18n="nav.contact">Contact</a></li>
             <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
+            <li><button id="lang-toggle-desktop" class="lang-btn desktop-only" aria-label="Switch Language">EN</button></li>
         </ul>
     </nav>
 
     <section class="page-header">
-        <h1>Get In Touch</h1>
-        <p>Have a project in mind? Let's work together.</p>
+        <h1 data-i18n="contact.title">Get In Touch</h1>
+        <p data-i18n="contact.subtitle">Have a project in mind? Let's work together.</p>
     </section>
 
     <section class="contact-container container">
@@ -44,21 +48,21 @@
             <div class="info-item">
                 <i class="fas fa-map-marker-alt"></i>
                 <div>
-                    <h3>Location</h3>
+                    <h3 data-i18n="contact.location">Location</h3>
                     <p>San Francisco, CA</p>
                 </div>
             </div>
             <div class="info-item">
                 <i class="fas fa-envelope"></i>
                 <div>
-                    <h3>Email</h3>
+                    <h3 data-i18n="contact.email">Email</h3>
                     <p>hello@myportfolio.com</p>
                 </div>
             </div>
             <div class="info-item">
                 <i class="fas fa-phone"></i>
                 <div>
-                    <h3>Phone</h3>
+                    <h3 data-i18n="contact.phone">Phone</h3>
                     <p>+1 (555) 123-4567</p>
                 </div>
             </div>
@@ -66,22 +70,22 @@
 
         <form class="contact-form">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name" data-i18n="contact.formName">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email" data-i18n="contact.formEmail">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="subject">Subject</label>
+                <label for="subject" data-i18n="contact.formSubject">Subject</label>
                 <input type="text" id="subject" name="subject" required>
             </div>
             <div class="form-group">
-                <label for="message">Message</label>
+                <label for="message" data-i18n="contact.formMessage">Message</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn primary">Send Message</button>
+            <button type="submit" class="btn primary" data-i18n="contact.sendMessage">Send Message</button>
         </form>
     </section>
 
@@ -91,7 +95,7 @@
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-        <p>&copy; 2025 MyPortfolio. All rights reserved.</p>
+        <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
     </footer>
 
     <script src="js/main.js"></script>

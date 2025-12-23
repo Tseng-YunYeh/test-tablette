@@ -1,6 +1,53 @@
+/* =========================================
+   Media Queries for Responsiveness
+   ========================================= */
+
+/* 
+   1. Desktop is the default (handled in styles.css)
+   2. Tablet / Small Laptop (max-width: 1024px)
+   3. Phone / Tablet Portrait (max-width: 768px)
+   4. Small Phone (max-width: 480px)
+*/
+
+/* =========================================
+   Tablet (Landscape) & Small Laptops
+   Max-width: 1024px
+   ========================================= */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+        max-width: 90%;
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+
+    /* Force 2 columns for grids on tablet */
+    .project-grid, 
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .about-grid {
+        gap: 30px;
+    }
+    
+    .contact-container {
+        gap: 30px;
+        grid-template-columns: 1fr 1.5fr;
+    }
+}
+
+/* =========================================
+   Phone & Tablet (Portrait)
+   Max-width: 768px
+   ========================================= */
 @media (max-width: 768px) {
+    /* Navbar & Menu */
     .navbar {
-        padding: 20px;
+        padding: 15px 20px;
     }
 
     .nav-links {
@@ -8,7 +55,7 @@
         right: 0;
         height: 100vh;
         top: 0;
-        background-color: var(--white);
+        background-color: var(--white); /* Uses theme variable */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -26,23 +73,138 @@
 
     .nav-links li {
         opacity: 1;
-        margin: 30px 0;
+        margin: 25px 0;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+        margin-left: auto;
+        margin-right: 10px;
+        z-index: 2001;
+        position: relative;
     }
 
     .hamburger {
         display: block;
         z-index: 2000;
+        cursor: pointer;
         position: relative;
+        width: 40px;
+        height: 40px;
+        /* Apply Gooey Filter */
+        filter: url('#goo');
+        /* Ensure container is large enough for blur */
+        padding: 5px;
+        box-sizing: content-box;
+        margin-right: -5px; /* Compensate for padding */
     }
 
+    /* Hover Effect: Elastic Spread */
+    .hamburger:not(.toggle):hover .line:nth-child(1) {
+        transform: translateY(-4px);
+    }
+
+    .hamburger:not(.toggle):hover .line:nth-child(2) {
+        transform: scaleX(1.1);
+    }
+
+    .hamburger:not(.toggle):hover .line:nth-child(3) {
+        transform: translateY(6px);
+    }
+    
+    .hamburger .line {
+        width: 30px;
+        height: 4px;
+        background-color: var(--text-color);
+        position: absolute;
+        border-radius: 20px; /* Round caps for liquid feel */
+        left: 10px; /* Center in padding */
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Elastic bounce */
+        transform-origin: center;
+    }
+    
+    /* Draw Effect: Animate width on load */
+    /* Removed to ensure visibility */
+    /* .hamburger .line {
+        animation: drawLine 1s ease-out forwards;
+    } */
+
+    /* @keyframes drawLine {
+        from { width: 0; }
+        to { width: 30px; }
+    } */
+    
+    .hamburger .line:nth-child(1) {
+        top: 10px;
+    }
+    
+    .hamburger .line:nth-child(2) {
+        top: 25px;
+    }
+    
+    .hamburger .line:nth-child(3) {
+        top: 36px;
+    }
+    
+    /* Liquid Animation State */
+    .hamburger.toggle .line:nth-child(1) {
+        top: 23px;
+        transform: rotate(45deg);
+        background-color: var(--primary-color);
+    }
+    
+    .hamburger.toggle .line:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px) scale(0.1); /* Shrink to blob */
+    }
+    
+    .hamburger.toggle .line:nth-child(3) {
+        top: 23px;
+        transform: rotate(-45deg);
+        background-color: var(--primary-color);
+    }
+    
+    .hamburger:hover .line {
+        background-color: var(--primary-color);
+        box-shadow: 0 0 10px var(--primary-color); /* Glow effect */
+    }
+
+    /* Typography & Hero */
     .hero-content h1 {
         font-size: 2.5rem;
     }
+    
+    .section-title {
+        font-size: 2rem;
+        margin: 40px 0 30px;
+    }
 
-    .about-grid, .contact-container {
+    /* Layout - Single Column */
+    .about-grid, 
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-image {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    .project-grid, 
+    .portfolio-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Timeline adjustments for mobile */
     .timeline::after {
         left: 31px;
     }
@@ -65,11 +227,64 @@
         left: 21px;
     }
     
-    .theme-title {
+    /* Contact Form */
+    .contact-form {
+        padding: 25px;
+    }
+    
+    .filter-container {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+/* =========================================
+   Small Phone
+   Max-width: 480px
+   ========================================= */
+@media (max-width: 480px) {
+    .hero-content h1 {
         font-size: 2rem;
     }
     
-    .projects-grid, .portfolio-grid {
-        grid-template-columns: 1fr;
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        padding: 10px 25px;
+        font-size: 0.8rem;
+    }
+    
+    .cta-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .cta-group .btn {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .page-header {
+        padding: 60px 20px;
+    }
+    
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    /* Adjust lightbox close button for small screens */
+    #lightbox .close {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
     }
 }
