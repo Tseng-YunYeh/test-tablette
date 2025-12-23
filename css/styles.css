@@ -866,6 +866,58 @@ footer {
 }
 
 
+/* Language Dropdown */
+.lang-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.lang-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    min-width: 120px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    border-radius: 5px;
+    right: 0;
+    top: 100%;
+    padding: 5px 0;
+    border: 1px solid var(--light-gray);
+}
+
+.lang-content a {
+    color: var(--text-color);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.lang-content a:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+}
+
+.lang-dropdown:hover .lang-content,
+.lang-dropdown.active .lang-content {
+    display: block;
+}
+
+.lang-btn i {
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+
+/* Mobile Dropdown Adjustments */
+.mobile-only.lang-dropdown {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
 /* Language Button */
 .lang-btn {
     background: none;
@@ -877,7 +929,9 @@ footer {
     font-weight: bold;
     font-size: 0.9rem;
     transition: var(--transition);
-    margin-left: 15px;
+    /* margin-left: 15px; Removed margin here, handled by container */
+    display: flex;
+    align-items: center;
 }
 
 .lang-btn:hover {
@@ -888,3 +942,83 @@ footer {
 .mobile-only {
     display: none;
 }
+
+/* PDF Project Card Styles */
+.pdf-preview {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.pdf-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.pdf-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pdf-preview:hover .pdf-overlay {
+    opacity: 1;
+}
+
+.pdf-preview:hover .pdf-img {
+    transform: scale(1.05);
+}
+
+.pdf-content {
+    text-align: center;
+    color: #333; /* Fixed dark color for visibility on light background */
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.9); /* Increased opacity for better contrast */
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.pdf-preview:hover .pdf-content {
+    transform: translateY(0);
+}
+
+.pdf-content i {
+    font-size: 2rem; /* Larger icon */
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.pdf-content span {
+    font-weight: 800; /* Extra bold */
+    font-size: 1rem; /* Slightly larger text */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pdf-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    cursor: pointer;
+}
+

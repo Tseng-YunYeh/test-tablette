@@ -21,7 +21,15 @@
             </a>
         </div>
         
-        <button id="lang-toggle-mobile" class="lang-btn mobile-only" aria-label="Switch Language">EN</button>
+        <div class="lang-dropdown mobile-only">
+            <button id="lang-btn-mobile" class="lang-btn" aria-label="Switch Language">EN <i class="fas fa-chevron-down"></i></button>
+            <div class="lang-content">
+                <a data-lang="en">English</a>
+                <a data-lang="fr">Français</a>
+                <a data-lang="es">Español</a>
+                <a data-lang="zh">中文</a>
+            </div>
+        </div>
 
         <div class="hamburger">
             <div class="line"></div>
@@ -34,7 +42,17 @@
             <li><a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a></li>
             <li><a href="contact.html" class="active" data-i18n="nav.contact">Contact</a></li>
             <li><button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
-            <li><button id="lang-toggle-desktop" class="lang-btn desktop-only" aria-label="Switch Language">EN</button></li>
+            <li>
+                <div class="lang-dropdown desktop-only">
+                    <button id="lang-btn-desktop" class="lang-btn" aria-label="Switch Language">EN <i class="fas fa-chevron-down"></i></button>
+                    <div class="lang-content">
+                        <a data-lang="en">English</a>
+                        <a data-lang="fr">Français</a>
+                        <a data-lang="es">Español</a>
+                        <a data-lang="zh">中文</a>
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
 

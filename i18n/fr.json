@@ -31,7 +31,8 @@
     "portfolio": {
         "title": "Mon travail",
         "subtitle": "Une sélection de mes projets récents.",
-        "filterAll": "Tout"
+        "filterAll": "Tout",
+        "clickToDownload": "Cliquer pour Télécharger"
     },
     "contact": {
         "title": "Contactez-moi",

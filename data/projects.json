@@ -3,11 +3,26 @@
   "themes": [
     {
       "id": "web",
-      "title": "Web Development",
+      "title": {
+        "en": "Web Development",
+        "fr": "Développement Web",
+        "es": "Desarrollo Web",
+        "zh": "Web開發"
+      },
       "projects": [
         {
-          "title": "RSEQ Redesign",
-          "description": "A complete redesign of the RSEQ website focusing on user experience and modern aesthetics.",
+          "title": {
+            "en": "RSEQ Redesign",
+            "fr": "Refonte RSEQ",
+            "es": "Rediseño RSEQ",
+            "zh": "RSEQ 重設計"
+          },
+          "description": {
+            "en": "A complete redesign of the RSEQ website focusing on user experience and modern aesthetics.",
+            "fr": "Une refonte complète du site web du RSEQ axée sur l'expérience utilisateur et l'esthétique moderne.",
+            "es": "Un rediseño completo del sitio web de RSEQ centrado en la experiencia del usuario y la estética moderna.",
+            "zh": "RSEQ 網站的全面重新設計，專注於用戶體驗和現代美學。"
+          },
           "type": "web",
           "link": "webs/RSEQ-redopage/index.html",
           "images": ["webs/RSEQ-redopage/imgs/logo.png"], 
@@ -17,17 +32,42 @@
     },
     {
       "id": "video",
-      "title": "Video Production",
+      "title": {
+        "en": "Video Production",
+        "fr": "Production Vidéo",
+        "es": "Producción de Video",
+        "zh": "視頻製作"
+      },
       "projects": [
         {
-          "title": "Robot Showcase",
-          "description": "A cinematic showcase of a robot model, demonstrating 3D rendering and video editing skills.",
+          "title": {
+            "en": "Robot Showcase",
+            "fr": "Présentation de Robot",
+            "es": "Exhibición de Robot",
+            "zh": "機器人展示"
+          },
+          "description": {
+            "en": "A cinematic showcase of a robot model, demonstrating 3D rendering and video editing skills.",
+            "fr": "Une présentation cinématographique d'un modèle de robot, démontrant des compétences en rendu 3D et en montage vidéo.",
+            "es": "Una exhibición cinematográfica de un modelo de robot, demostrando habilidades de renderizado 3D y edición de video.",
+            "zh": "機器人模型的電影展示，展示了3D渲染和視頻編輯技能。"
+          },
           "type": "video",
           "src": "videos/robot.mp4"
         },
         {
-          "title": "Movie Trailer",
-          "description": "An exciting trailer cut for a fictional movie project.",
+          "title": {
+            "en": "Movie Trailer",
+            "fr": "Bande-annonce de Film",
+            "es": "Tráiler de Película",
+            "zh": "電影預告片"
+          },
+          "description": {
+            "en": "An exciting trailer cut for a fictional movie project.",
+            "fr": "Une bande-annonce passionnante pour un projet de film fictif.",
+            "es": "Un tráiler emocionante para un proyecto de película ficticia.",
+            "zh": "為一個虛構電影項目剪輯的激動人心的預告片。"
+          },
           "type": "video",
           "src": "videos/Trailer.mp4"
         }
@@ -35,11 +75,26 @@
     },
     {
       "id": "design",
-      "title": "Graphic Design",
+      "title": {
+        "en": "Graphic Design",
+        "fr": "Design Graphique",
+        "es": "Diseño Gráfico",
+        "zh": "平面設計"
+      },
       "projects": [
         {
-          "title": "Les Gardiens Bleus",
-          "description": "Poster designs for 'Les Gardiens Bleus', exploring color theory and composition.",
+          "title": {
+            "en": "Les Gardiens Bleus",
+            "fr": "Les Gardiens Bleus",
+            "es": "Les Gardiens Bleus",
+            "zh": "Les Gardiens Bleus"
+          },
+          "description": {
+            "en": "Poster designs for 'Les Gardiens Bleus', exploring color theory and composition.",
+            "fr": "Conceptions d'affiches pour 'Les Gardiens Bleus', explorant la théorie des couleurs et la composition.",
+            "es": "Diseños de carteles para 'Les Gardiens Bleus', explorando la teoría del color y la composición.",
+            "zh": "為 'Les Gardiens Bleus' 設計的海報，探索色彩理論和構圖。"
+          },
           "type": "image-gallery",
           "images": [
             "imgs/affiche_lesgardiensbleus.jpg",
@@ -47,8 +102,18 @@
           ]
         },
         {
-          "title": "Sunset Scenes",
-          "description": "A series of digital paintings capturing the mood of sunsets in different environments.",
+          "title": {
+            "en": "Sunset Scenes",
+            "fr": "Scènes de Coucher de Soleil",
+            "es": "Escenas de Atardecer",
+            "zh": "日落場景"
+          },
+          "description": {
+            "en": "A series of digital paintings capturing the mood of sunsets in different environments.",
+            "fr": "Une série de peintures numériques capturant l'ambiance des couchers de soleil dans différents environnements.",
+            "es": "Una serie de pinturas digitales que capturan el ambiente de los atardeceres en diferentes entornos.",
+            "zh": "一系列捕捉不同環境中日落氛圍的數字繪畫。"
+          },
           "type": "image-gallery",
           "images": [
             "imgs/Sunset_scene1.png",
@@ -57,16 +122,36 @@
           ]
         },
         {
-          "title": "Mysterious Forests",
-          "description": "Concept art for a fantasy forest environment.",
+          "title": {
+            "en": "Mysterious Forests",
+            "fr": "Forêts Mystérieuses",
+            "es": "Bosques Misteriosos",
+            "zh": "神秘森林"
+          },
+          "description": {
+            "en": "Concept art for a fantasy forest environment.",
+            "fr": "Art conceptuel pour un environnement de forêt fantastique.",
+            "es": "Arte conceptual para un entorno de bosque de fantasía.",
+            "zh": "奇幻森林環境的概念藝術。"
+          },
           "type": "image-gallery",
           "images": [
             "imgs/Forets-mysterieux.jpg"
           ]
         },
         {
-          "title": "One",
-          "description": "A unique digital art piece.",
+          "title": {
+            "en": "One",
+            "fr": "Un",
+            "es": "Uno",
+            "zh": "一"
+          },
+          "description": {
+            "en": "A unique digital art piece.",
+            "fr": "Une œuvre d'art numérique unique.",
+            "es": "Una obra de arte digital única.",
+            "zh": "一件獨特的數字藝術作品。"
+          },
           "type": "image-gallery",
           "images": [
             "imgs/one.jpg"
@@ -76,31 +161,80 @@
     },
     {
       "id": "documents",
-      "title": "Reports & Presentations",
+      "title": {
+        "en": "Reports & Presentations",
+        "fr": "Rapports et Présentations",
+        "es": "Informes y Presentaciones",
+        "zh": "報告和演示"
+      },
       "projects": [
         {
-          "title": "User Analysis",
-          "description": "In-depth analysis of user testing results.",
+          "title": {
+            "en": "User Analysis",
+            "fr": "Analyse des Utilisateurs",
+            "es": "Análisis de Usuarios",
+            "zh": "用戶分析"
+          },
+          "description": {
+            "en": "In-depth analysis of user testing results.",
+            "fr": "Analyse approfondie des résultats des tests utilisateurs.",
+            "es": "Análisis en profundidad de los resultados de las pruebas de usuarios.",
+            "zh": "深入分析用戶測試結果。"
+          },
           "type": "pdf",
-          "src": "pdfs/analyse-test-user.pdf"
+          "src": "pdfs/analyse-test-user.pdf",
+          "image": "imgs/user-analyse.png"
         },
         {
-          "title": "Project Presentation",
-          "description": "Slides from the final project presentation.",
+          "title": {
+            "en": "Project Presentation",
+            "fr": "Présentation du Projet",
+            "es": "Presentación del Proyecto",
+            "zh": "項目演示"
+          },
+          "description": {
+            "en": "Slides from the final project presentation.",
+            "fr": "Diapositives de la présentation finale du projet.",
+            "es": "Diapositivas de la presentación final del proyecto.",
+            "zh": "最終項目演示的幻燈片。"
+          },
           "type": "pdf",
-          "src": "pdfs/presentation_pdf.pdf"
+          "src": "pdfs/presentation_pdf.pdf",
+          "image": "imgs/projet-presentation.png"
         },
         {
-          "title": "Sufmer Report",
-          "description": "Technical report on the Sufmer project.",
+          "title": {
+            "en": "Sufmer Report",
+            "fr": "Rapport Sufmer",
+            "es": "Informe Sufmer",
+            "zh": "Sufmer 報告"
+          },
+          "description": {
+            "en": "Technical report on the Sufmer project.",
+            "fr": "Rapport technique sur le projet Sufmer.",
+            "es": "Informe técnico sobre el proyecto Sufmer.",
+            "zh": "關於 Sufmer 項目的技術報告。"
+          },
           "type": "pdf",
-          "src": "pdfs/sufmer.pdf"
+          "src": "pdfs/sufmer.pdf",
+          "image": "imgs/sufmer.png"
         },
         {
-          "title": "Web Redo Presentation",
-          "description": "Presentation deck for the web redesign proposal.",
+          "title": {
+            "en": "Web Redo Presentation",
+            "fr": "Présentation Refonte Web",
+            "es": "Presentación Rediseño Web",
+            "zh": "Web 重設計演示"
+          },
+          "description": {
+            "en": "Presentation deck for the web redesign proposal.",
+            "fr": "Support de présentation pour la proposition de refonte web.",
+            "es": "Presentación para la propuesta de rediseño web.",
+            "zh": "Web 重設計提案的演示文稿。"
+          },
           "type": "pdf",
-          "src": "pdfs/web-redo-presentation.pdf"
+          "src": "pdfs/web-redo-presentation.pdf",
+          "image": "imgs/web-redo.png"
         }
       ]
     }

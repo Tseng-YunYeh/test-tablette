@@ -1,3 +1,5 @@
+let translations = {};
+
 document.addEventListener('DOMContentLoaded', () => {
     // Cookie Helpers
     function setCookie(name, value, days) {
@@ -50,10 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Language Switcher
-    const langToggleDesktop = document.getElementById('lang-toggle-desktop');
-    const langToggleMobile = document.getElementById('lang-toggle-mobile');
+    const langBtnDesktop = document.getElementById('lang-btn-desktop');
+    const langBtnMobile = document.getElementById('lang-btn-mobile');
+    const langOptions = document.querySelectorAll('[data-lang]');
     let currentLang = getCookie('lang') || 'en';
-    let translations = {};
+    // let translations = {}; // Moved to global scope
+
+    const langMap = {
+        'en': 'EN',
+        'fr': 'FR',
+        'es': 'ES',
+        'zh': 'ZH'
+    };
 
     async function loadTranslations(lang) {
         try {
@@ -88,27 +98,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateLangButtons(lang) {
-        const nextLang = lang === 'en' ? 'FR' : 'EN';
-        if (langToggleDesktop) langToggleDesktop.textContent = nextLang;
-        if (langToggleMobile) langToggleMobile.textContent = nextLang;
+        const langText = langMap[lang] || 'EN';
+        const btnContent = `${langText} <i class="fas fa-chevron-down"></i>`;
+        
+        if (langBtnDesktop) langBtnDesktop.innerHTML = btnContent;
+        if (langBtnMobile) langBtnMobile.innerHTML = btnContent;
     }
 
-    function toggleLanguage() {
-        currentLang = currentLang === 'en' ? 'fr' : 'en';
+    async function setLanguage(lang) {
+        currentLang = lang;
         setCookie('lang', currentLang, 365);
-        loadTranslations(currentLang);
+        await loadTranslations(currentLang);
+        const allText = translations.portfolio && translations.portfolio.filterAll ? translations.portfolio.filterAll : 'All';
+        loadPortfolio(currentLang, allText);
     }
 
-    if (langToggleDesktop) {
-        langToggleDesktop.addEventListener('click', toggleLanguage);
+    function toggleDropdown(event) {
+        event.stopPropagation();
+        const dropdown = event.currentTarget.closest('.lang-dropdown');
+        // Close other dropdowns first
+        document.querySelectorAll('.lang-dropdown').forEach(d => {
+            if (d !== dropdown) d.classList.remove('active');
+        });
+        dropdown.classList.toggle('active');
     }
-    
-    if (langToggleMobile) {
-        langToggleMobile.addEventListener('click', toggleLanguage);
+
+    function closeAllDropdowns() {
+        document.querySelectorAll('.lang-dropdown').forEach(d => {
+            d.classList.remove('active');
+        });
     }
+
+    if (langBtnDesktop) {
+        langBtnDesktop.addEventListener('click', toggleDropdown);
+    }
+
+    if (langBtnMobile) {
+        langBtnMobile.addEventListener('click', toggleDropdown);
+    }
+
+    document.addEventListener('click', () => {
+        closeAllDropdowns();
+    });
+
+    langOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const lang = e.target.getAttribute('data-lang');
+            setLanguage(lang);
+            closeAllDropdowns();
+        });
+    });
 
     // Initial Load
-    loadTranslations(currentLang);
+    loadTranslations(currentLang).then(() => {
+        const allText = translations.portfolio && translations.portfolio.filterAll ? translations.portfolio.filterAll : 'All';
+        loadPortfolio(currentLang, allText);
+    });
 
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
@@ -146,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load Portfolio Data
-    loadPortfolio();
+    // loadPortfolio(); // Moved to Initial Load chain
 
     // Initialize Lightbox
     createLightbox();
@@ -197,17 +243,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-async function loadPortfolio() {
+let portfolioData = null;
+
+async function loadPortfolio(lang = 'en', allText = 'All') {
     const featuredContainer = document.getElementById('featured-portfolio');
     const fullContainer = document.getElementById('full-portfolio');
 
     if (!featuredContainer && !fullContainer) return;
 
     try {
-        const response = await fetch('data/projects.json');
-        const data = await response.json();
+        if (!portfolioData) {
+            const response = await fetch('data/projects.json');
+            portfolioData = await response.json();
+        }
+        const data = portfolioData;
 
         if (featuredContainer) {
+            featuredContainer.innerHTML = '';
             // Home Page: Random Selection
             const allProjects = [];
             data.themes.forEach(theme => {
@@ -221,7 +273,7 @@ async function loadPortfolio() {
             const selected = shuffled.slice(0, 3);
 
             selected.forEach(project => {
-                const card = createProjectCard(project);
+                const card = createProjectCard(project, lang);
                 featuredContainer.appendChild(card);
             });
         }
@@ -236,14 +288,14 @@ async function loadPortfolio() {
             
             const allBtn = document.createElement('button');
             allBtn.className = 'filter-btn active';
-            allBtn.textContent = 'All';
+            allBtn.textContent = allText;
             allBtn.dataset.filter = 'all';
             filterContainer.appendChild(allBtn);
 
             data.themes.forEach(theme => {
                 const btn = document.createElement('button');
                 btn.className = 'filter-btn';
-                btn.textContent = theme.title;
+                btn.textContent = theme.title[lang] || theme.title['en'];
                 btn.dataset.filter = theme.id;
                 filterContainer.appendChild(btn);
             });
@@ -256,7 +308,7 @@ async function loadPortfolio() {
 
             data.themes.forEach(theme => {
                 theme.projects.forEach(project => {
-                    const card = createProjectCard(project);
+                    const card = createProjectCard(project, lang);
                     card.dataset.category = theme.id;
                     // Add animation class for initial load
                     card.classList.add('fade-in-up');
@@ -306,7 +358,7 @@ async function loadPortfolio() {
     }
 }
 
-function createProjectCard(project) {
+function createProjectCard(project, lang) {
     const card = document.createElement('div');
     card.className = 'project-card';
 
@@ -316,7 +368,10 @@ function createProjectCard(project) {
         if (project.images && project.images.length > 0) {
             if (project.images.length > 1) {
                 // Carousel
-                const slides = project.images.map(img => `<div class="carousel-slide"><img src="${img}" alt="${project.title}"></div>`).join('');
+                const slides = project.images.map(img => {
+                    const title = project.title[lang] || project.title['en'];
+                    return `<div class="carousel-slide"><img src="${img}" alt="${title}"></div>`;
+                }).join('');
                 mediaHtml = `
                     <div class="carousel-container">
                         <div class="carousel-track">
@@ -328,7 +383,8 @@ function createProjectCard(project) {
                 `;
             } else {
                 // Single Image
-                mediaHtml = `<img src="${project.images[0]}" alt="${project.title}">`;
+                const title = project.title[lang] || project.title['en'];
+                mediaHtml = `<img src="${project.images[0]}" alt="${title}">`;
             }
         } else {
              mediaHtml = `<div style="height:100%; background:#eee; display:flex; align-items:center; justify-content:center;">No Image</div>`;
@@ -341,10 +397,19 @@ function createProjectCard(project) {
             </video>
         `;
     } else if (project.type === 'pdf') {
+        const downloadText = (translations.portfolio && translations.portfolio.clickToDownload) ? translations.portfolio.clickToDownload : 'Click to Download';
+        const title = project.title[lang] || project.title['en'];
+        
         mediaHtml = `
-            <div style="height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f9f9f9;">
-                <i class="fas fa-file-pdf pdf-icon"></i>
-                <a href="${project.src}" class="btn text-btn" download>Download PDF</a>
+            <div class="pdf-preview">
+                <img src="${project.image}" alt="${title}" class="pdf-img">
+                <div class="pdf-overlay">
+                    <div class="pdf-content">
+                        <i class="fas fa-file-download"></i>
+                        <span>${downloadText}</span>
+                    </div>
+                </div>
+                <a href="${project.src}" class="pdf-link" download aria-label="${downloadText}"></a>
             </div>
         `;
         card.classList.add('pdf-card');
@@ -352,13 +417,16 @@ function createProjectCard(project) {
 
     const linkHtml = project.link ? `<a href="${project.link}" target="_blank" class="btn secondary" style="padding: 5px 15px; font-size: 0.8rem;">View Live</a>` : '';
     
+    const title = project.title[lang] || project.title['en'];
+    const description = project.description[lang] || project.description['en'];
+
     card.innerHTML = `
         <div class="card-media">
             ${mediaHtml}
         </div>
         <div class="card-content">
-            <h3 class="card-title">${project.title}</h3>
-            <p class="card-desc">${project.description}</p>
+            <h3 class="card-title">${title}</h3>
+            <p class="card-desc">${description}</p>
             <div class="card-actions">
                 ${linkHtml}
             </div>
