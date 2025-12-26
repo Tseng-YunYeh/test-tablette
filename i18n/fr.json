@@ -21,9 +21,11 @@
         "mySkills": "Mes compétences",
         "letsTalk": "Discutons",
         "experience": "Expérience",
+        "exp1_date": "2023 - Présent",
         "exp1_role": "Développeur Senior",
         "exp1_company": "Tech Solutions Inc.",
         "exp1_desc": "Direction du développement frontend et mentorat des développeurs juniors.",
+        "exp2_date": "2021 - 2023",
         "exp2_role": "Web Designer",
         "exp2_company": "Creative Studio",
         "exp2_desc": "Conception et mise en œuvre d'interfaces utilisateur pour divers projets clients."

@@ -21,9 +21,11 @@
         "mySkills": "My Skills",
         "letsTalk": "Let's Talk",
         "experience": "Experience",
+        "exp1_date": "2023 - Present",
         "exp1_role": "Senior Developer",
         "exp1_company": "Tech Solutions Inc.",
         "exp1_desc": "Leading frontend development and mentoring junior developers.",
+        "exp2_date": "2021 - 2023",
         "exp2_role": "Web Designer",
         "exp2_company": "Creative Studio",
         "exp2_desc": "Designed and implemented UI for various client projects."

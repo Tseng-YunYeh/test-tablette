@@ -306,30 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hero Animations
         const heroContent = document.querySelector('.hero-content');
         if (heroContent) {
-            gsap.from(".hero-content h1", {
-                duration: 1,
-                y: 100,
-                opacity: 0,
-                ease: "power4.out",
-                delay: 0.5
-            });
-            
-            gsap.from(".hero-content p", {
-                duration: 1,
-                y: 50,
-                opacity: 0,
-                ease: "power3.out",
-                delay: 0.8
-            });
-
-            gsap.from(".cta-group", {
-                duration: 1,
-                y: 50,
-                opacity: 0,
-                ease: "power3.out",
-                delay: 1
-            });
-
             // Parallax Effect on Hero
             gsap.to(".hero", {
                 backgroundPosition: "50% 100%",
@@ -463,6 +439,7 @@ async function loadPortfolio(lang = 'en', allText = 'All') {
 function createProjectCard(project, lang) {
     const card = document.createElement('div');
     card.className = 'project-card';
+    card.dataset.type = project.type;
 
     let mediaHtml = '';
     
@@ -648,3 +625,156 @@ function createLightbox() {
         }
     });
 }
+
+// ===== GSAP Text Animations =====
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Initialize animations based on page content
+        initHeroAnimation();
+        initSectionTitles();
+        initTextReveal();
+        initListStagger();
+    }
+});
+
+function initHeroAnimation() {
+    const heroTitle = document.querySelector('.hero-content h1');
+    const heroSubtitle = document.querySelector('.hero-content p');
+    const heroBtn = document.querySelector('.hero-content .cta-group');
+
+    if (heroTitle) {
+        const tl = gsap.timeline();
+        
+        // Check for existing spans to preserve structure/i18n
+        const spans = heroTitle.querySelectorAll('span');
+        const target = spans.length > 0 ? spans : heroTitle;
+
+        tl.fromTo(target, 
+            { y: 100, opacity: 0 },
+            {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                stagger: 0.2,
+                ease: "back.out(1.7)"
+            }
+        )
+        .fromTo(heroSubtitle, 
+            { y: 30, opacity: 0 },
+            {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                ease: "power3.out"
+            }, "-=0.5")
+        .fromTo(heroBtn, 
+            { scale: 0.8, opacity: 0 },
+            {
+                duration: 0.8,
+                scale: 1,
+                opacity: 1,
+                ease: "elastic.out(1, 0.5)"
+            }, "-=0.5");
+    }
+}
+
+function initSectionTitles() {
+    const titles = document.querySelectorAll('.section-title, h2:not(.hero-content h2)');
+    
+    titles.forEach(title => {
+        // Create a wrapper for the slide-up effect
+        const wrapper = document.createElement('div');
+        wrapper.style.overflow = 'hidden';
+        // Ensure the wrapper respects the title's alignment
+        wrapper.style.display = window.getComputedStyle(title).display;
+        wrapper.style.textAlign = window.getComputedStyle(title).textAlign;
+        
+        title.parentNode.insertBefore(wrapper, title);
+        wrapper.appendChild(title);
+
+        gsap.fromTo(title, 
+            { y: "100%" },
+            {
+                y: "0%",
+                duration: 1.2,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+}
+
+function initTextReveal() {
+    // Paragraphs and other text blocks
+    // Exclude contact-info p as the parent items are already animated
+    const textBlocks = document.querySelectorAll('.about-text p, .project-card p');
+    
+    textBlocks.forEach(block => {
+        gsap.fromTo(block,
+            { 
+                opacity: 0,
+                y: 20,
+                filter: "blur(10px)"
+            },
+            {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: block,
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
+}
+
+function initListStagger() {
+    // Stagger lists like skills or contact info items
+    const lists = document.querySelectorAll('.skills-list, .contact-info');
+    
+    lists.forEach(list => {
+        const items = list.children; // Get direct children
+        if (items.length > 0) {
+            gsap.fromTo(items,
+                { 
+                    opacity: 0,
+                    x: -30
+                },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: list,
+                        start: "top 85%"
+                    }
+                }
+            );
+        }
+    });
+}
+
+// Navbar Scroll Effect
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > window.innerHeight * 0.2) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+});

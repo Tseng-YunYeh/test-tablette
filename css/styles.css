@@ -130,35 +130,50 @@ img {
 /* Navbar */
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px 5%;
-    background-color: var(--white);
-    box-shadow: var(--shadow);
-    position: sticky;
+    background-color: transparent;
+    box-shadow: none;
+    position: fixed;
+    width: 100%;
     top: 0;
+    left: 0;
     z-index: 1000;
+    transition: all 0.4s ease;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--secondary-color);
-    display: flex;
-    align-items: center;
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 5%;
 }
 
-.logo img {
-    height: 50px;
-    width: auto;
+/* Dark Mode Scrolled Navbar Override */
+[data-theme="dark"] .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-links {
     display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li {
-    margin-left: 30px;
+    margin: 0 20px;
+}
+
+.lang-dropdown.desktop-only {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .nav-links a {
@@ -703,6 +718,43 @@ footer {
     background-color: #f0f0f0;
 }
 
+/* Hover effect for clickable images */
+.project-card:is([data-type="web"], [data-type="image-gallery"]) .card-media {
+    cursor: pointer;
+}
+
+.project-card:is([data-type="web"], [data-type="image-gallery"]) .card-media::after {
+    content: '\f00e'; /* fa-search-plus */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 3.5rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+    backdrop-filter: blur(2px);
+}
+
+.project-card:is([data-type="web"], [data-type="image-gallery"]) .card-media:hover::after {
+    opacity: 1;
+}
+
+.project-card:is([data-type="web"], [data-type="image-gallery"]) .card-media img {
+    transition: transform 0.5s ease;
+}
+
+.project-card:is([data-type="web"], [data-type="image-gallery"]) .card-media:hover img {
+    transform: scale(1.05);
+}
+
 .card-media img, .card-media video {
     width: 100%;
     height: 100%;
@@ -881,37 +933,48 @@ footer {
 }
 
 .lang-content {
-    display: none;
+    /* display: none; Removed for animation */
     position: absolute;
     background-color: var(--white);
     min-width: 120px;
-    box-shadow: var(--shadow);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Enhanced shadow */
     z-index: 1000;
-    border-radius: 5px;
+    border-radius: 10px; /* Smoother corners */
     right: 0;
     top: 100%;
-    padding: 5px 0;
+    padding: 8px 0; /* Slightly more padding */
     border: 1px solid var(--light-gray);
+    
+    /* Cool Animation Effect */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy pop effect */
+    transform-origin: top right;
 }
 
 .lang-content a {
     color: var(--text-color);
-    padding: 10px 15px;
+    padding: 10px 20px;
     text-decoration: none;
     display: block;
     font-size: 0.9rem;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .lang-content a:hover {
-    background-color: var(--light-gray);
+    background-color: rgba(52, 152, 219, 0.1);
     color: var(--primary-color);
+    padding-left: 25px;
 }
 
 .lang-dropdown:hover .lang-content,
 .lang-dropdown.active .lang-content {
-    display: block;
+    /* display: block; Removed for animation */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
 .lang-btn i {
@@ -927,16 +990,15 @@ footer {
 
 /* Language Button */
 .lang-btn {
-    background: none;
-    border: 2px solid var(--secondary-color);
+    background: transparent;
+    border: 2px solid currentColor;
     color: var(--secondary-color);
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     font-size: 0.9rem;
-    transition: var(--transition);
-    /* margin-left: 15px; Removed margin here, handled by container */
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
 }
@@ -944,6 +1006,7 @@ footer {
 .lang-btn:hover {
     background-color: var(--secondary-color);
     color: var(--bg-color);
+    border-color: var(--secondary-color);
 }
 
 .mobile-only {
@@ -1028,4 +1091,11 @@ footer {
     z-index: 10;
     cursor: pointer;
 }
+
+/* GSAP Animation Styles */
+.hero-content h1 .char {
+    display: inline-block;
+    white-space: pre;
+}
+
 
