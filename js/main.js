@@ -215,7 +215,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     element.textContent = value;
                 }
-                // element.setAttribute('data-text', value); // No longer needed for nav links with new effect
+                
+                // Update glitch-text data-text attribute for the glitch effect
+                const glitchParent = element.closest('.glitch-text');
+                if (glitchParent) {
+                    glitchParent.setAttribute('data-text', value);
+                }
             }
         });
 
@@ -356,6 +361,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        // ============================================
+        // CARD STACKING EFFECT - All Pages
+        // ============================================
+        const stackingContent = document.querySelector('.stacking-content');
+        const heroSection = document.querySelector('.hero, .about-hero-header, .portfolio-hero-header, .contact-hero-header');
+        
+        if (stackingContent && heroSection) {
+            // Initial state
+            gsap.set(stackingContent, {
+                y: 50,
+                opacity: 0.9
+            });
+
+            // Animate content sliding up and covering hero
+            gsap.to(stackingContent, {
+                y: 0,
+                opacity: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: stackingContent,
+                    start: "top 90%",
+                    end: "top 20%",
+                    scrub: 1
+                }
+            });
+
+            // Hero content fade out and scale down as content covers it
+            gsap.to(heroSection.querySelector('.hero-content, .about-hero-content, .portfolio-hero-content, .contact-hero-content'), {
+                scale: 0.95,
+                opacity: 0.3,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: stackingContent,
+                    start: "top 100%",
+                    end: "top 30%",
+                    scrub: true
+                }
+            });
+        }
     }
 });
 
@@ -468,6 +513,11 @@ async function loadPortfolio(lang = 'en', allText = 'All') {
 
         // Initialize Observers for new elements
         initObservers();
+
+        // Refresh ScrollTrigger to account for new content height
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
 
     } catch (error) {
         console.error('Error loading portfolio:', error);
@@ -592,7 +642,73 @@ function initObservers() {
         el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
         appearObserver.observe(el);
     });
+
+    // Skill bars animation observer
+    const skillBarsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const skillFills = entry.target.querySelectorAll('.skill-fill');
+                skillFills.forEach(fill => {
+                    const width = fill.getAttribute('data-width');
+                    setTimeout(() => {
+                        fill.style.width = width + '%';
+                    }, 300);
+                });
+                skillBarsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    const skillsSection = document.querySelector('.skills-section');
+    if (skillsSection) {
+        skillBarsObserver.observe(skillsSection);
+    }
+
+    // Stats counter animation
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statItems = entry.target.querySelectorAll('.stat-item');
+                statItems.forEach(item => {
+                    const target = parseInt(item.getAttribute('data-count'));
+                    const numberEl = item.querySelector('.stat-number');
+                    if (numberEl && target) {
+                        animateCounter(numberEl, target);
+                    }
+                });
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) {
+        statsObserver.observe(heroStats);
+    }
 }
+
+// Counter animation function
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const duration = 1500;
+    const stepTime = duration / 50;
+
+    const counter = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(counter);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, stepTime);
+}
+
+// Initialize observers on page load
+document.addEventListener('DOMContentLoaded', () => {
+    initObservers();
+});
 
 // Keyframes for nav link fade
 const styleSheet = document.createElement("style");
@@ -1354,18 +1470,193 @@ function initRandomThunder() {
             }
         }
         
-        // Spawn thunder at random intervals
-        function spawnThunder() {
-            // Check if container is still in DOM
-            if (!document.body.contains(container)) return;
+        // Visibility-based thunder spawning for CPU optimization
+        let isVisible = false;
+        let thunderTimeout = null;
+        
+        // Intersection Observer to pause when not visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isVisible = entry.isIntersecting;
+                if (isVisible && !thunderTimeout) {
+                    scheduleThunder();
+                } else if (!isVisible && thunderTimeout) {
+                    clearTimeout(thunderTimeout);
+                    thunderTimeout = null;
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(container);
+        
+        function scheduleThunder() {
+            if (!isVisible || !document.body.contains(container)) {
+                thunderTimeout = null;
+                return;
+            }
             
-            createRandomThunderBolt();
-            // Random interval between 2s and 4s
-            const nextInterval = 1000 + Math.random() * 1000;
-            setTimeout(spawnThunder, nextInterval);
+            // Longer intervals: 3-6 seconds for less CPU usage
+            const nextInterval = 3000 + Math.random() * 3000;
+            
+            thunderTimeout = setTimeout(() => {
+                if (isVisible && document.body.contains(container)) {
+                    requestAnimationFrame(() => createRandomThunderBolt());
+                }
+                scheduleThunder();
+            }, nextInterval);
         }
         
-        // Start immediately
-        spawnThunder();
+        // Start if initially visible
+        const rect = container.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            isVisible = true;
+            scheduleThunder();
+        }
     });
 }
+// Footer Search Form Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const footerSearchForm = document.getElementById('footer-search-form');
+    const footerSearchInput = document.getElementById('footer-search');
+    
+    if (footerSearchForm && footerSearchInput) {
+        footerSearchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const searchQuery = footerSearchInput.value.trim();
+            if (searchQuery) {
+                // Navigate to portfolio page with search query
+                window.location.href = `portfolio.html?search=${encodeURIComponent(searchQuery)}`;
+            }
+        });
+    }
+    
+    // Check if on portfolio page and has search query
+    if (window.location.pathname.includes('portfolio.html')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        
+        if (searchQuery) {
+            // Wait for portfolio to load then filter
+            setTimeout(() => {
+                const projectCards = document.querySelectorAll('.project-card');
+                const searchLower = searchQuery.toLowerCase();
+                
+                projectCards.forEach(card => {
+                    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+                    const category = card.dataset.category?.toLowerCase() || '';
+                    
+                    if (title.includes(searchLower) || description.includes(searchLower) || category.includes(searchLower)) {
+                        card.style.display = '';
+                        card.style.animation = 'fadeInUp 0.5s ease forwards';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Fill in the footer search with the query
+                if (footerSearchInput) {
+                    footerSearchInput.value = searchQuery;
+                }
+            }, 500);
+        }
+    }
+});
+
+// Footer Animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    // Select elements to animate
+    const footerLogo = footer.querySelector('.footer-logo');
+    const footerHeadings = footer.querySelectorAll('.footer-section h3:not(.footer-logo)');
+    const footerTexts = footer.querySelectorAll('.footer-section p');
+    const searchForm = footer.querySelector('.footer-search-form');
+    const socialLinks = footer.querySelectorAll('.social-links a');
+    const footerBottom = footer.querySelector('.footer-bottom');
+    const footerDivider = footer.querySelector('.footer-divider');
+
+    // Create a timeline
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: footer,
+            start: "top 85%", // Trigger when top of footer hits 85% of viewport
+            toggleActions: "play none none none" // Play once, do not reset
+        }
+    });
+
+    // Add animations to timeline
+    if (footerLogo) {
+        tl.from(footerLogo, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)"
+        });
+    }
+
+    if (footerHeadings.length > 0) {
+        tl.from(footerHeadings, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out"
+        }, "-=0.6");
+    }
+
+    if (footerTexts.length > 0) {
+        tl.from(footerTexts, {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.05,
+            ease: "power3.out"
+        }, "-=0.6");
+    }
+
+    if (searchForm) {
+        tl.from(searchForm, {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.6");
+    }
+
+    if (socialLinks.length > 0) {
+        tl.from(socialLinks, {
+            y: 20,
+            opacity: 0,
+            scale: 0,
+            duration: 0.4,
+            stagger: 0.05,
+            ease: "back.out(2.5)",
+            clearProps: "all" // Important: clear props to allow CSS hover effects to work
+        }, "-=0.2");
+    }
+    
+    if (footerDivider) {
+        tl.from(footerDivider, {
+            scaleX: 0,
+            opacity: 0,
+            duration: 1.5,
+            ease: "expo.out"
+        }, "-=0.4");
+    }
+
+    if (footerBottom) {
+        tl.from(footerBottom.children, {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            clearProps: "all"
+        }, "-=0.6");
+    }
+});

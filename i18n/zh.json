@@ -50,6 +50,13 @@
         "sendMessage": "發送信息"
     },
     "footer": {
-        "rights": "© 2025 MyPortfolio. 保留所有權利。"
+        "rights": "© 2025 MyPortfolio. 保留所有權利。",
+        "description": "創造啟發和創新的數字體驗。讓我們一起打造非凡的作品。",
+        "searchProjects": "搜索項目",
+        "searchText": "在我的作品集中查找特定項目。",
+        "searchPlaceholder": "搜索項目...",
+        "connect": "聯繫我",
+        "connectText": "在社交媒體上關注我，獲取最新動態和幕後內容。",
+        "madeWith": "用 ❤️ 和創意製作"
     }
 }

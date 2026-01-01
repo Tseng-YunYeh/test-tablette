@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="css/media.css">
     <link rel="stylesheet" href="css/loader.css">
     <link rel="stylesheet" href="css/cursor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body class="contact-page">
     <!-- Custom Cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
@@ -140,72 +140,102 @@
         <div class="easter-egg-hint">Double-click anywhere!</div>
     </section>
 
-    <section class="contact-container container">
-        <div class="contact-info">
-            <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                    <h3 data-i18n="contact.location">Location</h3>
-                    <p>San Francisco, CA</p>
+    <div class="stacking-content">
+        <section class="contact-container container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3 data-i18n="contact.location">Location</h3>
+                        <p>San Francisco, CA</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3 data-i18n="contact.email">Email</h3>
+                        <p>hello@myportfolio.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3 data-i18n="contact.phone">Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
                 </div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <h3 data-i18n="contact.email">Email</h3>
-                    <p>hello@myportfolio.com</p>
-                </div>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-phone"></i>
-                <div>
-                    <h3 data-i18n="contact.phone">Phone</h3>
-                    <p>+1 (555) 123-4567</p>
-                </div>
-            </div>
-        </div>
 
-        <form class="contact-form">
-            <div class="form-group">
-                <label for="name" data-i18n="contact.formName">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email" data-i18n="contact.formEmail">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="subject" data-i18n="contact.formSubject">Subject</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-            <div class="form-group">
-                <label for="message" data-i18n="contact.formMessage">Message</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn primary" data-i18n="contact.sendMessage">Send Message</button>
-        </form>
-    </section>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name" data-i18n="contact.formName">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-i18n="contact.formEmail">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject" data-i18n="contact.formSubject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" data-i18n="contact.formMessage">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn primary" data-i18n="contact.sendMessage">Send Message</button>
+            </form>
+        </section>
 
-    <footer>
-        <div class="footer-bg-elements">
-            <div class="lightning-container" id="footer-lightning"></div>
-            <div class="floating-shape shape-footer-1"><i class="fas fa-terminal"></i></div>
-            <div class="floating-shape shape-footer-2"><i class="fas fa-rocket"></i></div>
-        </div>
-        
-        <!-- Corner Decorations -->
-        <div class="footer-corner corner-top-left"></div>
-        <div class="footer-corner corner-top-right"></div>
-        <div class="footer-corner corner-bottom-left"></div>
-        <div class="footer-corner corner-bottom-right"></div>
-        
-        <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
-    </footer>
+        <footer>
+            <div class="footer-glow"></div>
+            <div class="footer-bg-elements">
+                <div class="lightning-container" id="footer-lightning"></div>
+                <div class="floating-shape shape-footer-1"><i class="fas fa-terminal"></i></div>
+                <div class="floating-shape shape-footer-2"><i class="fas fa-rocket"></i></div>
+            </div>
+            
+            <!-- Corner Decorations -->
+            <div class="footer-corner corner-top-left"></div>
+            <div class="footer-corner corner-top-right"></div>
+            <div class="footer-corner corner-bottom-left"></div>
+            <div class="footer-corner corner-bottom-right"></div>
+            
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">MyPortfolio</h3>
+                    <p data-i18n="footer.description">Creating digital experiences that inspire and innovate. Let's build something amazing together.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.searchProjects">Search Projects</h3>
+                    <p data-i18n="footer.searchText">Find specific projects from my portfolio.</p>
+                    <form class="footer-search-form" id="footer-search-form">
+                        <div class="footer-search-input">
+                            <input type="text" id="footer-search" placeholder="Search projects..." data-i18n-placeholder="footer.searchPlaceholder">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.connect">Connect</h3>
+                    <p data-i18n="footer.connectText">Follow me on social media for updates and behind-the-scenes content.</p>
+                    <div class="social-links">
+                        <a href="#" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="x-twitter" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
+                <p data-i18n="footer.madeWith">Made with <i class="fas fa-heart" style="color: #ef4444;"></i> and creativity</p>
+            </div>
+        </footer>
+    </div><!-- End stacking-content -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>

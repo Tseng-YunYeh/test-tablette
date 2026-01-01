@@ -50,6 +50,13 @@
         "sendMessage": "Envoyer le message"
     },
     "footer": {
-        "rights": "© 2025 MyPortfolio. Tous droits réservés."
+        "rights": "© 2025 MyPortfolio. Tous droits réservés.",
+        "description": "Créer des expériences numériques qui inspirent et innovent. Construisons quelque chose d'extraordinaire ensemble.",
+        "searchProjects": "Rechercher des Projets",
+        "searchText": "Trouvez des projets spécifiques dans mon portfolio.",
+        "searchPlaceholder": "Rechercher des projets...",
+        "connect": "Connectez-vous",
+        "connectText": "Suivez-moi sur les réseaux sociaux pour les mises à jour et les coulisses.",
+        "madeWith": "Fait avec ❤️ et créativité"
     }
 }

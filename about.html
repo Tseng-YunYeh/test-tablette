@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="css/media.css">
     <link rel="stylesheet" href="css/loader.css">
     <link rel="stylesheet" href="css/cursor.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body class="about-page">
     <!-- Custom Cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
@@ -102,59 +102,95 @@
             </div>
             <p class="typewriter-text" data-i18n="about.subtitle">My journey, skills, and passion.</p>
             
-            <!-- Interactive Stats -->
-            <div class="hero-stats">
-                <div class="stat-item" data-count="5">
-                    <span class="stat-number">0</span>+
-                    <span class="stat-label">Years Exp</span>
+            <!-- Decorative Elements -->
+            <div class="hero-decoration">
+                <div class="deco-line"></div>
+                <div class="deco-icons">
+                    <i class="fas fa-code"></i>
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-coffee"></i>
                 </div>
-                <div class="stat-item" data-count="50">
-                    <span class="stat-number">0</span>+
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-item" data-count="30">
-                    <span class="stat-number">0</span>+
-                    <span class="stat-label">Clients</span>
-                </div>
+                <div class="deco-line"></div>
             </div>
-        </div>
-        
-        <div class="scroll-hint">
-            <span>Scroll to explore</span>
-            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <section class="about-content container">
-        <div class="about-grid">
-            <div class="about-image">
-                <img src="imgs/me.jpg" alt="My Photo" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">
-            </div>
-            <div class="about-text">
-                <h2 data-i18n="about.whoIAm">Who I Am</h2>
-                <p data-i18n="about.description">I am a passionate developer with a keen eye for design. I specialize in building responsive, user-friendly websites and applications. With a background in both design and engineering, I bridge the gap between aesthetics and functionality.</p>
-                
-                <div class="skills">
-                    <h3 data-i18n="about.mySkills">My Skills</h3>
-                    <div class="skill-tags">
-                        <span>HTML5</span>
-                        <span>CSS3</span>
-                        <span>JavaScript</span>
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>UI/UX</span>
+    <div class="stacking-content">
+        <section class="about-content container">
+            <div class="about-grid">
+                <div class="about-image interactive-image">
+                    <div class="image-frame">
+                        <img src="imgs/me.jpg" alt="My Photo">
+                    </div>
+                    <div class="image-glow"></div>
+                </div>
+                <div class="about-text">
+                    <h2 data-i18n="about.whoIAm">Who I Am</h2>
+                    <p data-i18n="about.description">I am a passionate developer with a keen eye for design. I specialize in building responsive, user-friendly websites and applications. With a background in both design and engineering, I bridge the gap between aesthetics and functionality.</p>
+                    
+                    <div class="skills-section">
+                        <h3 data-i18n="about.mySkills">My Skills</h3>
+                        <div class="skill-bars">
+                            <div class="skill-bar-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML5 / CSS3</span>
+                                    <span class="skill-percent">95%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-fill" data-width="95"></div>
+                                </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Node.js</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar-item">
+                            <div class="skill-info">
+                                <span class="skill-name">UI/UX Design</span>
+                                <span class="skill-percent">88%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-fill" data-width="88"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <a href="contact.html" class="btn primary" data-i18n="about.letsTalk">Let's Talk</a>
+                <a href="contact.html" class="btn primary pulse-btn" data-i18n="about.letsTalk">Let's Talk</a>
             </div>
         </div>
     </section>
 
     <section class="experience container">
         <h2 class="section-title" data-i18n="about.experience">Experience</h2>
-        <div class="timeline">
+        <div class="timeline animated-timeline">
             <div class="timeline-item">
+                <div class="timeline-marker">
+                    <i class="fas fa-briefcase"></i>
+                </div>
                 <div class="timeline-date" data-i18n="about.exp1_date">2023 - Present</div>
                 <div class="timeline-content">
                     <h3 data-i18n="about.exp1_role">Senior Developer</h3>
@@ -163,6 +199,9 @@
                 </div>
             </div>
             <div class="timeline-item">
+                <div class="timeline-marker">
+                    <i class="fas fa-palette"></i>
+                </div>
                 <div class="timeline-date" data-i18n="about.exp2_date">2021 - 2023</div>
                 <div class="timeline-content">
                     <h3 data-i18n="about.exp2_role">Web Designer</h3>
@@ -174,26 +213,52 @@
     </section>
 
     <footer>
-        <div class="footer-bg-elements">
-            <div class="lightning-container" id="footer-lightning"></div>
-            <div class="floating-shape shape-footer-1"><i class="fas fa-terminal"></i></div>
-            <div class="floating-shape shape-footer-2"><i class="fas fa-rocket"></i></div>
-        </div>
-        
-        <!-- Corner Decorations -->
-        <div class="footer-corner corner-top-left"></div>
-        <div class="footer-corner corner-top-right"></div>
-        <div class="footer-corner corner-bottom-left"></div>
-        <div class="footer-corner corner-bottom-right"></div>
-        
-        <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-        <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
-    </footer>
-
+            <div class="footer-glow"></div>
+            <div class="footer-bg-elements">
+                <div class="lightning-container" id="footer-lightning"></div>
+                <div class="floating-shape shape-footer-1"><i class="fas fa-terminal"></i></div>
+                <div class="floating-shape shape-footer-2"><i class="fas fa-rocket"></i></div>
+            </div>
+            
+            <!-- Corner Decorations -->
+            <div class="footer-corner corner-top-left"></div>
+            <div class="footer-corner corner-top-right"></div>
+            <div class="footer-corner corner-bottom-left"></div>
+            <div class="footer-corner corner-bottom-right"></div>
+            
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-logo">MyPortfolio</h3>
+                    <p data-i18n="footer.description">Creating digital experiences that inspire and innovate. Let's build something amazing together.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.searchProjects">Search Projects</h3>
+                    <p data-i18n="footer.searchText">Find specific projects from my portfolio.</p>
+                    <form class="footer-search-form" id="footer-search-form">
+                        <div class="footer-search-input">
+                            <input type="text" id="footer-search" placeholder="Search projects..." data-i18n-placeholder="footer.searchPlaceholder">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.connect">Connect</h3>
+                    <p data-i18n="footer.connectText">Follow me on social media for updates and behind-the-scenes content.</p>
+                    <div class="social-links">
+                        <a href="#" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="x-twitter" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <div class="footer-bottom">
+                <p data-i18n="footer.rights">&copy; 2025 MyPortfolio. All rights reserved.</p>
+                <p data-i18n="footer.madeWith">Made with <i class="fas fa-heart" style="color: #ef4444;"></i> and creativity</p>
+            </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="js/main.js"></script>
